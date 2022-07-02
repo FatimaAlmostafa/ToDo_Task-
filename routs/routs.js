@@ -2,17 +2,25 @@ const  express = require('express');
 const app = express()
 const task = require('../controller/taskfunction');
 
-////////// Create a new  task 
-app.post('/task', task.Creat);
+const validateId=(req,res,next)=>{
+    console.log(req.params.id)
+    next()
+}
 
-//////////////Retrieve one  task
-app.get('/task',task.getTasks);
 
-//////////////update task
-app.put('/task/:id',task.update);
 
-/////////////// delete task
-app.delete('/task/:id',task.remove);
+// Create a new  task 
+app.post('/', task.Creat);
 
-////////////////////////
+//Retrieve one  task
+app.get('/',validateId,task.getTasks);
+//Retrieve all  task
+app.get('/',task.getAll);
+//update task
+app.put('/:id',task.update);
+
+// delete task
+app.delete('/:id',task.remove);
+
+///
 module.exports = app;

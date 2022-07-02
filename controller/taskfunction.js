@@ -20,6 +20,15 @@ return task.save()
 
 
 }
+// retrive all task
+exports.getAll=(req,res)=>{
+    Task.find().then(data=>{
+        return res.send ({success:"get all task",data})
+    }).catch(err =>{
+        return res.send({success:"err in get tasks",err})
+    })
+};
+
 //retrive task  completed 
 exports.getTasks=(req,res)=>{
     let filter = {}
@@ -27,25 +36,25 @@ exports.getTasks=(req,res)=>{
    if(req.query.notCompleted) filter.isComplete=false
    
     Task.find(filter).then(data=>{
-        return res.send({success:true,data})
+        return res.send({success:"succses in get task",data})
     }).catch(err=>{
-        return res.send({success:false,err})
+        return res.send({success:"cant get task",err})
     })
 }
 //update 
 exports.update = (req, res) =>{
     Task.updateOne({_id:req.params.id},req.body).then(data=>{
-        return res.send({success:true})
+        return res.send({success:"updating done"})
     }).catch(err=>{
-        return res.send({success:false,err})
+        return res.send({success:"err in update",err})
     })
 }
 
 //deleting
 exports.remove = (req, res) => {
     Task.deleteOne({_id:req.params.id}).then(data=>{
-        return res.send({success:true})
+        return res.send({success:"delete task done"})
     }).catch(err=>{
-        return res.send({success:false,err})
+        return res.send({success:"err in deleting",err})
     })
 };

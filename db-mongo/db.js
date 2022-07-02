@@ -16,11 +16,13 @@ db.once('open', function () {
 const taskSchema =new mongoose.Schema({
     title:{
         type: String,
-        max: 200
+        max: 200,
+        required:true
     },
     desc:{
         type:String,
-        max:500
+        max:500,
+        required:true
     },
     isComplete:{
         type :Boolean,
